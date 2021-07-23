@@ -1,10 +1,14 @@
-jar {
-    enabled = true
-}
 bootJar {
     enabled = false
 }
+jar {
+    enabled = true
+}
 
 dependencies {
-    // DB 추가하기
+    // JPA + H2
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.h2database:h2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 }

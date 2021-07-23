@@ -10,17 +10,12 @@ buildscript {
     }
 }
 
-allprojects {
-    group = 'com.teamnexters'
-    version = '1.0.0-SNAPSHOT'
-}
-
-
 subprojects {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
+    group = 'com.teamnexters'
     sourceCompatibility = '11'
 
     repositories {
