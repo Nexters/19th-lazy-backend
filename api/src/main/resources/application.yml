@@ -1,0 +1,57 @@
+server:
+  port: 9093
+
+spring:
+  devtools:
+    livereload:
+      enabled: true
+  config:
+    import: classpath:application-common.yml
+  profiles:
+    active: local
+  security:
+    user:
+      name: username
+      password: passw0rd
+
+logging:
+  level:
+    org.springframework: debug
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    groups-order: DESC
+    operationsSorter: method
+    disable-swagger-default-url: true
+    display-request-duration: true
+  api-docs:
+    path: /api-docs
+  show-actuator: true
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  paths-to-match:
+    - /v1/**
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+#
+#springdoc:
+#  swagger-ui:
+#    enabled: false
