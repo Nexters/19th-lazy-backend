@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
     info = @Info(title = "밍굴맹굴 API 명세서",
         description = "당신은 얼마나 밍굴맹굴합니까?",
         version = "v1.0.0",
-        contact = @Contact(name = "NEXTERS 19th 베짱이두둑",
+        contact = @Contact(name = "NEXTERS 19th 배짱이두둑",
             url = "https://teamnexters.com/"),
         license = @License(name = "Apache 2.0",
             url = "https://www.apache.org/licenses/LICENSE-2.0.html")

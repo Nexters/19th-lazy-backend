@@ -15,7 +15,7 @@ public class ApiController {
      * API ping 테스트
      * @return 단순 String
      */
-    @Operation(summary = "✅ Ping Test API"
+    @Operation(summary = "✅ Connect Test API"
         , description = "연결이 잘 된다면 pong 이 날아가요")
     @GetMapping("/ping")
     public String pingPong() {

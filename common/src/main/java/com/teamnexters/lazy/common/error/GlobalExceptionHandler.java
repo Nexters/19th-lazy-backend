@@ -3,7 +3,6 @@ package com.teamnexters.lazy.common.error;
 import com.teamnexters.lazy.common.error.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import java.nio.file.AccessDeniedException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -30,7 +29,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * @ModelAttribut 으로 binding error 발생시 BindException 발생한다.
+     * @ ModelAttribute 으로 binding error 발생시 BindException 발생한다.
      * ref https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#mvc-ann-modelattrib-method-args
      */
     @ExceptionHandler(BindException.class)
