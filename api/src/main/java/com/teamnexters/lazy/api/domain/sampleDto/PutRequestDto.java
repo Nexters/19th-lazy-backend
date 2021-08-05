@@ -10,7 +10,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PutRequestDto {
 
     private String name;
