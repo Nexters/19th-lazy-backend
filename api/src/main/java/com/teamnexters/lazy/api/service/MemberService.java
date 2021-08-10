@@ -4,6 +4,7 @@ import com.teamnexters.lazy.api.exception.EmailDuplicationException;
 import com.teamnexters.lazy.common.domain.member.Member;
 import com.teamnexters.lazy.common.domain.member.MemberDto;
 import com.teamnexters.lazy.common.domain.member.MemberRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,10 +26,14 @@ public class MemberService {
 
     }
 
+    @Transactional(readOnly = true)
+    public List<Member> getMemberList() {
+        return memberRepository.findAll();
+    }
 
     @Transactional(readOnly = true)
     public boolean isExistedEmail(String email) {
-        return memberRepository.findByEmail(email) != null;
+        return memberRepository.findByEmail(email).orElseGet(null) != null;
     }
 
 }
