@@ -1,23 +1,19 @@
 package com.teamnexters.lazy.common.domain.member;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
+
+import com.teamnexters.lazy.common.domain.BaseTimeEntity;
+import lombok.*;
 
 @Getter
+@Table(name = "member")
+@ToString(of = {"name", "email"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Member {
+public class Member extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mem_idx")
     private Long memberIdx;
 
@@ -37,13 +33,18 @@ public class Member {
     @Column(name = "role", nullable = false)
     private Role role;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "provider", nullable = false)
+    private Provider provider; // OAuth2 Provider
+
     @Builder
-    public Member(String name, String nickName, String email, String picture, Role role) {
+    public Member(String name, String nickName, String email, String picture, Role role, Provider provider) {
         this.name = name;
         this.nickName = nickName;
         this.email = email;
         this.picture = picture;
         this.role = role;
+        this.provider = provider;
     }
 
     public Member update(String nickName, String picture) {
