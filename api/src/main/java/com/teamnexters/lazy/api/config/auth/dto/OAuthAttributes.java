@@ -1,5 +1,6 @@
 package com.teamnexters.lazy.api.config.auth.dto;
 import com.teamnexters.lazy.common.domain.member.Member;
+import com.teamnexters.lazy.common.domain.member.Provider;
 import com.teamnexters.lazy.common.domain.member.Role;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,14 +14,16 @@ public class OAuthAttributes {
     private final String name;
     private final String email;
     private final String picture;
+    private final Provider provider;
 
     @Builder
-    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String name, String email, String picture) {
+    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String name, String email, String picture, Provider provider) {
         this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;
         this.name = name;
         this.email = email;
         this.picture = picture;
+        this.provider = provider;
     }
 
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes){
@@ -47,6 +50,7 @@ public class OAuthAttributes {
             .picture((String) response.get("profile_image"))
             .attributes(response)
             .nameAttributeKey("id")
+            .provider(Provider.NAVER)
             .build();
     }
 
@@ -62,17 +66,19 @@ public class OAuthAttributes {
             .picture((String) kakaoProfile.get("profile_image_url"))
             .attributes(attributes)
             .nameAttributeKey("id")
+            .provider(Provider.KAKAO)
             .build();
     }
 
     private static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes) {
         return OAuthAttributes.builder()
-            .name((String) attributes.get("name"))
-            .email((String) attributes.get("email"))
-            .picture((String) attributes.get("picture"))
-            .attributes(attributes)
-            .nameAttributeKey(userNameAttributeName)
-            .build();
+                .name((String) attributes.get("name"))
+                .email((String) attributes.get("email"))
+                .picture((String) attributes.get("picture"))
+                .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .provider(Provider.GOOGLE)
+                .build();
     }
 
     public Member toEntity(){
@@ -81,6 +87,7 @@ public class OAuthAttributes {
             .email(email)
             .picture(picture)
             .role(Role.GUEST) // 기본 권한 GUEST
+            .provider(provider)
             .build();
     }
 
