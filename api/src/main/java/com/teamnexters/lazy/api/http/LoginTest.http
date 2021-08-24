@@ -1,10 +1,20 @@
+### Swagger 접속 주소
+GET http://localhost:9093/swagger-ui/index.html
+
 ### Kakao
 GET https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=0dbe9a0459afad34006a1f41568dff99&redirect_uri=http://localhost:9093/oauth2/code/kakao
 
 ### 구글 로그인 페이지 연동
-GET http://localhost:9012/oauth2/authorization/google
+GET http://localhost:9093/oauth2/authorization/google
 
 ### 네이버 로그인 페이지 연동
-GET http://localhost:9012/oauth2/authorization/naver
+GET http://localhost:9093/oauth2/authorization/naver
 
+### POST Test
+POST http://localhost:9093/api/vi/member/90001/posts
+Content-Type: application/json
 
+{
+  "id" : 1,
+  "name": "young-jun-park"
+}
