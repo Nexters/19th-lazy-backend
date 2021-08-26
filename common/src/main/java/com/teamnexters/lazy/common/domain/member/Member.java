@@ -15,11 +15,12 @@ public class Member extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mem_idx")
-    private Long memberIdx;
+    private Long memIdx;
 
     @Column(name = "mem_name", nullable = false)
     private String name;
 
+    @Setter
     @Column(name = "mem_nickname")
     private String nickName;
 
