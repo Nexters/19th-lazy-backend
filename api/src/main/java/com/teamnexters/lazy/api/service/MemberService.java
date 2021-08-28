@@ -26,9 +26,15 @@ public class MemberService {
 
     }
 
+    /**
+     * 회원 1명 조회
+     *
+     * @param memIdx 회원 번호
+     * @return 해당 회원 Data
+     */
     @Transactional(readOnly = true)
-    public List<Member> getMemberList() {
-        return memberRepository.findAll();
+    public Member getOneMember(Long memIdx) {
+        return memberRepository.findById(memIdx).orElseThrow();
     }
 
     @Transactional(readOnly = true)
