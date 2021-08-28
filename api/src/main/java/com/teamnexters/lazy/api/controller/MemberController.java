@@ -35,14 +35,15 @@ public class MemberController {
                 return ResponseEntity.ok().body(memberService.getOneMember(idx));
     }
 
-    @Operation(summary = "✅ 회원 전체 조회 API",
-            description = " 전체 회원 목록 List 조회", tags = { "contact" })
+
+    @Operation(summary = "✅ 닉네임 수정 API",
+            description = "회원의 닉네임을 수정해요.", tags = { "contact" })
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "성공 코드",
+            @ApiResponse(responseCode = "200", description = "Ok",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = Contact.class)))) })
-    // GET http://localhost:9093/v1/member
-    @GetMapping("/v1/member")
-    public ResponseEntity<List<Member>> getMemberList() {
-        return ResponseEntity.ok().body(memberService.getMemberList());
+    @PutMapping("/v1/member")
+    public ResponseEntity<Long> updateMemberNickName(@RequestBody @Valid MemberDto.UpdateNickNameReq dto) {
+        memberService.updateNickName(dto);
+        return ResponseEntity.ok().body(dto.getMemIdx());
     }
 }
