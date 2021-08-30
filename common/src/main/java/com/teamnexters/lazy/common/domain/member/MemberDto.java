@@ -6,36 +6,19 @@ import lombok.NoArgsConstructor;
 
 public class MemberDto {
 
+    /**
+     * 닉네임 변경 Request
+     */
     @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    public static class SignUpReq {
-        private String email;
-        private String name;
+    public static class UpdateNickNameReq {
+        private Long memIdx;
+        private String nickName;
 
-        public SignUpReq(String email, String name) {
-            this.email = email;
-            this.name = name;
+        public UpdateNickNameReq(Long memIdx, String nickName) {
+            this.memIdx = memIdx;
+            this.nickName = nickName;
         }
-
-        public Member toEntity() {
-            return Member.builder()
-                .email(this.email)
-                .name(this.name)
-                .build();
-        }
-
-    }
-
-    @Getter
-    public static class Res {
-        private final String email;
-        private final String name;
-
-        public Res(Member member) {
-            this.email = member.getEmail();
-            this.name = member.getName();
-        }
-
     }
 
 }
