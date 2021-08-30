@@ -15,15 +15,19 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    /**
+     * 회원 닉네임 업데이트
+     *
+     * @param dto 업데이트 요청 데이터
+     */
     @Transactional
-    public MemberDto.Res create(MemberDto.SignUpReq dto) {
-        if (isExistedEmail(dto.getEmail()))
-            throw new EmailDuplicationException(dto.getEmail());
+    public void updateNickName(MemberDto.UpdateNickNameReq dto) {
+        if (isExistedNickName(dto.getNickName()))
+            throw new NickNameDuplicationException(dto.getNickName());
 
-        Member entity = memberRepository.save(dto.toEntity());
-
-        return new MemberDto.Res(entity);
-
+        Member member = getOneMember(dto.getMemIdx());
+        member.setNickName(dto.getNickName());
+        memberRepository.save(member); // 확인해보고 중복코드 제거
     }
 
     /**
@@ -37,9 +41,17 @@ public class MemberService {
         return memberRepository.findById(memIdx).orElseThrow();
     }
 
+
+    /**
+     * 닉네임 중복 검사
+     *
+     * @param nickName 닉네임
+     * @return 중복 여부 (True = 중복)
+     */
     @Transactional(readOnly = true)
-    public boolean isExistedEmail(String email) {
-        return memberRepository.findByEmail(email).orElseGet(null) != null;
+    public boolean isExistedNickName(String nickName) {
+        return memberRepository.findByNickName(nickName).orElseGet(null) != null;
     }
+
 
 }
