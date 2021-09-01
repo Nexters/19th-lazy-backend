@@ -12,4 +12,15 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
      * @return 일치하는 회원 정보
      */
     Optional<Member> findByEmail(String email);
+
+
+    /**
+     * 이미 등록된 닉네임인지 검사
+     *
+     * @param  nickName 닉네임
+     * @return 일치하는 회원 정보
+     */
+    Optional<Member> findByNickName(String nickName);
+
+
 }

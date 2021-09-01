@@ -1,10 +1,9 @@
 package com.teamnexters.lazy.api.service;
 
-import com.teamnexters.lazy.api.exception.EmailDuplicationException;
+import com.teamnexters.lazy.api.exception.NickNameDuplicationException;
 import com.teamnexters.lazy.common.domain.member.Member;
 import com.teamnexters.lazy.common.domain.member.MemberDto;
 import com.teamnexters.lazy.common.domain.member.MemberRepository;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
