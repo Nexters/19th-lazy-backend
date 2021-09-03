@@ -1,0 +1,50 @@
+package com.teamnexters.lazy.api.service;
+
+import com.teamnexters.lazy.api.domain.HabitDto;
+import com.teamnexters.lazy.api.exception.HabitDuplicationException;
+import com.teamnexters.lazy.common.domain.habit.Habit;
+import com.teamnexters.lazy.common.domain.habit.HabitRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@RequiredArgsConstructor
+public class HabitService {
+
+    private final HabitRepository habitRepository;
+
+    /**
+     * 습관 생성하기
+     *
+     * @param dto 습관 생성을 위한 DTO
+     * @return 습관 생성 응답
+     */
+    @Transactional
+    public HabitDto.Res create(HabitDto.AddReq dto) {
+        // 습관 중복 검사
+        if (isExistedHabit(dto.getMemIdx(), dto.getHabitName()))
+            throw new HabitDuplicationException(dto.getHabitName());
+
+        Habit entity = habitRepository.save(dto.toEntity());
+
+        return new HabitDto.Res(entity.getHabitIdx(), entity.getHabitName());
+
+    }
+
+
+    /**
+     * 기존에 존재하는 습관인지
+     *
+     * @param memIdx    회원번호
+     * @param habitName 습관이름
+     * @return True : 이미 있음
+     */
+    @Transactional(readOnly = true)
+    public boolean isExistedHabit(Long memIdx, String habitName) {
+        return habitRepository.findByMemIdxAndHabitName(memIdx, habitName).orElseGet(null) != null;
+    }
+
+
+
+}
