@@ -32,6 +32,17 @@ public class HabitService {
 
     }
 
+    /**
+     * 페이징 적용한 습관 조회
+     *
+     * @param memIdx    회원 번호
+     * @param pageable  페이징 정보
+     * @return  습관 목록 조회
+     */
+    @Transactional(readOnly = true)
+    public Page<Habit> getHabitList(Long memIdx, Pageable pageable) {
+        return habitRepository.findByMemIdx(memIdx, pageable);
+    }
 
     /**
      * 기존에 존재하는 습관인지
