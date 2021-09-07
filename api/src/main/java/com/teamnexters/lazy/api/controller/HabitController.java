@@ -55,5 +55,18 @@ public class HabitController {
         return ResponseEntity.ok().body(habitService.getHabitList(memIdx, pageRequest));
     }
 
+    @Operation(summary = "✅ 습관 삭제 API",
+            description = "습관을 삭제해요.", tags = { "contact" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "성공 코드",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Long.class)))) })
+    @DeleteMapping("/v1/habit/{mem-idx}/{habit-idx}")
+    public ResponseEntity<Long> deleteHabit(
+            @PathVariable(name="mem-idx") Long memIdx,
+            @PathVariable(name="habit-idx") Long habitIdx
+    ) {
+        return ResponseEntity.ok().body(habitService.deleteHabit(memIdx, habitIdx));
+    }
+
 
 }
