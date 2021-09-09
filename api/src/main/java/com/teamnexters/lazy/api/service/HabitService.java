@@ -5,6 +5,8 @@ import com.teamnexters.lazy.api.exception.HabitDuplicationException;
 import com.teamnexters.lazy.common.domain.habit.Habit;
 import com.teamnexters.lazy.common.domain.habit.HabitRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,6 +56,32 @@ public class HabitService {
     @Transactional(readOnly = true)
     public boolean isExistedHabit(Long memIdx, String habitName) {
         return habitRepository.findByMemIdxAndHabitName(memIdx, habitName).orElseGet(null) != null;
+    }
+
+    /**
+     * 습관을 삭제
+     *
+     * @param memIdx    회원번호
+     * @param habitIdx  습관번호
+     * @return 회원번호
+     */
+    @Transactional
+    public Long deleteHabit(Long memIdx, Long habitIdx) {
+        Habit habit = getOneHabit(memIdx, habitIdx);
+        habitRepository.delete(habit);
+        return memIdx;
+    }
+
+    /**
+     * 습관 1개 조회
+     *
+     * @param memIdx    회원 번호
+     * @param habitIdx  습관 번호
+     * @return 해당 습관
+     */
+    @Transactional(readOnly = true)
+    public Habit getOneHabit(Long memIdx, Long habitIdx) {
+        return habitRepository.findByMemIdxAndHabitIdx(memIdx, habitIdx).orElseThrow();
     }
 
 
