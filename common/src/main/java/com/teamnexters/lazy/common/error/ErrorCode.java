@@ -15,7 +15,12 @@ public enum ErrorCode {
 
     // Member
     EMAIL_DUPLICATION(400, "M001", "Email is Duplication"),
-    LOGIN_INPUT_INVALID(400, "M002", "Login input is invalid");
+    NICKNAME_DUPLICATION(400, "M002", "NickName is Duplication"),
+    LOGIN_INPUT_INVALID(400, "M003", "Login input is invalid"),
+
+    // Habit
+    HABIT_DUPLICATION(400, "H001", "Habit is Duplication");
+
 
     private final String code;
     private final String message;
