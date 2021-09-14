@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class HabitDto {
@@ -18,27 +20,37 @@ public class HabitDto {
     @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class AddReq {
+
+        // 알림 시간
+        @Schema(hidden = true)
+        private LocalTime finalNoticeTime;
+
         @Schema(description = "회원 번호", defaultValue = "2")
         private Long memIdx;
         @Schema(description = "습관 이름", defaultValue = "사이드레터럴레이즈 5세트")
         private String habitName;
         @Schema(description = "습관 이름", defaultValue = "1세트 30개, 휴식 30초")
         private String habitDetail;
-        @Schema(description = "습관 ", defaultValue = "사이드레터럴레이즈 5세트")
+        @Schema(description = "습관 카테고리", defaultValue = "143")
         private Integer habitCategory;
+        @Schema(description = "습관 주기", defaultValue = "1,2,3")
         private String habitFrequency;
+        @Schema(description = "알림 여부", defaultValue = "true")
         private Boolean noticeState;
-        private LocalTime noticeTime;
-
+        @Schema(description = "알림 시간", defaultValue = "12:00")
+        private String noticeTime;
         public AddReq(Long memIdx, String habitName, String habitDetail, Integer habitCategory,
-                      String habitFrequency, Boolean noticeState, LocalTime noticeTime) {
+                      String habitFrequency, Boolean noticeState, String noticeTime) {
             this.memIdx = memIdx;
             this.habitName = habitName;
             this.habitDetail = habitDetail;
             this.habitCategory = habitCategory;
             this.habitFrequency = habitFrequency;
             this.noticeState = noticeState;
-            this.noticeTime = noticeTime;
+            List<String> hourAndMin = Arrays.asList(noticeTime.split(":"));
+            LocalTime formTime = LocalTime.of(Integer.parseInt(hourAndMin.get(0)),
+                    Integer.parseInt(hourAndMin.get(1)));
+            this.finalNoticeTime = formTime;
         }
 
         public Habit toEntity() {
@@ -48,7 +60,7 @@ public class HabitDto {
                     .habitDetail(this.habitDetail)
                     .habitCategory(this.habitCategory)
                     .habitNoticeState(this.noticeState)
-                    .habitNoticeTime(this.noticeTime)
+                    .habitNoticeTime(this.finalNoticeTime)
                     .habitDelayDay(0)
                     .habitFrequency(this.habitFrequency)
                     .build();
@@ -70,23 +82,5 @@ public class HabitDto {
 
     }
 
-
-    @Getter
-    public static class GetAllRes {
-        private final String habitName;
-        private final String habitDetail;
-        private final Integer habitCategory;
-        private final Integer habitFrequency;
-        private final Integer habitDelayDay;
-
-        public GetAllRes(String habitName, String habitDetail, Integer habitCategory, Integer habitFrequency, Integer habitDelayDay) {
-            this.habitName = habitName;
-            this.habitDetail = habitDetail;
-            this.habitCategory = habitCategory;
-            this.habitFrequency = habitFrequency;
-            this.habitDelayDay = habitDelayDay;
-        }
-
-    }
 
 }
