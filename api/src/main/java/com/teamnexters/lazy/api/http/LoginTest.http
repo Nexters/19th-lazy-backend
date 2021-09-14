@@ -10,6 +10,9 @@ GET http://localhost:9093/oauth2/authorization/google
 ### 네이버 로그인 페이지 연동
 GET http://localhost:9093/oauth2/authorization/naver
 
+### 카카오 로그인 페이지 연동
+GET http://localhost:9093/oauth2/authorization/kakao
+
 ### POST Test
 POST http://localhost:9093/api/vi/member/90001/posts
 Content-Type: application/json
