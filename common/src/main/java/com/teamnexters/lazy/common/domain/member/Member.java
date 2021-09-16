@@ -21,10 +21,10 @@ public class Member extends BaseTimeEntity {
     private String name;
 
     @Setter
-    @Column(name = "mem_nickname")
+    @Column(name = "mem_nickname", unique = true)
     private String nickName;
 
-    @Column(name = "mem_email", nullable = false)
+    @Column(name = "mem_email", unique = true, nullable = false)
     private String email;
 
     @Column(name = "mem_image_url", nullable = false)
