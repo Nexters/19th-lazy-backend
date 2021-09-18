@@ -67,6 +67,7 @@ public class HabitService {
      */
     @Transactional
     public Long deleteHabit(Long memIdx, Long habitIdx) {
+        // 없은 습관인 경우 Exception Handling
         Habit habit = getOneHabit(memIdx, habitIdx);
         habitRepository.delete(habit);
         return memIdx;
