@@ -1,0 +1,12 @@
+### 습관 추가 API
+POST {{baseUrl}}/api/v1/habit
+Content-Type: application/json
+
+< addHabit.json
+
+### 회원 정보 조회
+GET {{baseUrl}}/api/v1/member/{{mem-idx}}
+
+
+### 습관 삭제 API
+DELETE {{baseUrl}}/api/v1/habit/{{mem-idx}}/{{habit-idx}}
