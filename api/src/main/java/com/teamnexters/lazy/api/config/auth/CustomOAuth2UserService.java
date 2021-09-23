@@ -4,6 +4,7 @@ import com.teamnexters.lazy.api.config.auth.dto.SessionUser;
 import com.teamnexters.lazy.common.domain.member.Member;
 import com.teamnexters.lazy.common.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
@@ -52,6 +54,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         // 소셜 로그인 된 유저 정보 - 객체화
         OAuthAttributes attributes = OAuthAttributes.
                 of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
+
+        log.info(">>> OAuth Login Attributes : {}", attributes.toString());
+
         // 사용자 정보 등록 or 업데이트
         Member member = saveOrUpdate(attributes);
         // 세션에 사용자 정보 등록
