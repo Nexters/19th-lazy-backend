@@ -1,12 +1,14 @@
 package com.teamnexters.lazy.api.service;
 
+import com.teamnexters.lazy.api.domain.MemberDto;
 import com.teamnexters.lazy.api.exception.NickNameDuplicationException;
 import com.teamnexters.lazy.common.domain.member.Member;
-import com.teamnexters.lazy.common.domain.member.MemberDto;
 import com.teamnexters.lazy.common.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -52,5 +54,16 @@ public class MemberService {
         return memberRepository.findByNickName(nickName).orElseGet(null) != null;
     }
 
+
+    /**
+     * 이메일로 회원 1명 조회
+     *
+     * @param email 이메일
+     * @return 해당 회원 Data
+     */
+    @Transactional(readOnly = true)
+    public Optional<Member> getOneMemberByEmail(String email) {
+        return memberRepository.findByEmail(email);
+    }
 
 }
