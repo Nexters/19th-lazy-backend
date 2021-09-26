@@ -11,15 +11,17 @@ public enum ErrorCode {
     INTERNAL_SERVER_ERROR(500, "C004", "Server Error"),
     INVALID_TYPE_VALUE(400, "C005", " Invalid Type Value"),
     HANDLE_ACCESS_DENIED(403, "C006", "Access is Denied"),
+    TOKEN_IS_EXPIRED(407, "C007", "Token is expired"),
 
 
     // Member
-    EMAIL_DUPLICATION(400, "M001", "Email is Duplication"),
-    NICKNAME_DUPLICATION(400, "M002", "NickName is Duplication"),
-    LOGIN_INPUT_INVALID(400, "M003", "Login input is invalid"),
+    EMAIL_DUPLICATION(410, "M001", "Email is Duplication"),
+    NICKNAME_DUPLICATION(411, "M002", "NickName is Duplication"),
+    LOGIN_INPUT_INVALID(412, "M003", "Login input is invalid"),
+    OAUTH_PROVIDER_NOT_SUPPORT(413, "M004", "Provider is not support"),
 
     // Habit
-    HABIT_DUPLICATION(400, "H001", "Habit is Duplication");
+    HABIT_DUPLICATION(421, "H001", "Habit is Duplication");
 
 
     private final String code;
