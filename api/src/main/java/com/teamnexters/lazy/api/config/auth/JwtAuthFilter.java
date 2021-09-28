@@ -3,6 +3,7 @@ package com.teamnexters.lazy.api.config.auth;
 import com.teamnexters.lazy.api.config.auth.jwt.JwtTokenProvider;
 import com.teamnexters.lazy.api.service.MemberService;
 import com.teamnexters.lazy.common.domain.member.Member;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Optional;
 
+@Slf4j
 public class JwtAuthFilter extends GenericFilterBean {
     private final JwtTokenProvider jwtTokenProvider;
 
@@ -32,6 +34,8 @@ public class JwtAuthFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         String token = ((HttpServletRequest)request).getHeader("Auth");
+
+        log.info(">>> Filter Token : {}", token);
 
         if (token != null && jwtTokenProvider.verifyToken(token)) {
             String email = jwtTokenProvider.getUid(token);
