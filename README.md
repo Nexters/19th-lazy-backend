@@ -18,7 +18,7 @@
 
 | `환경` | URL |
 |:---:|:---|
-| `개발` | 15.164.86.177/swagger-ui/index.html |
+| `개발` | http://15.164.86.177:9093/swagger-ui.html |
 | `운영` | 배포 후 작성 |
 
 ## Convention
