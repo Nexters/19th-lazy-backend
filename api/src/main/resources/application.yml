@@ -15,7 +15,6 @@ logging:
     org.springframework: debug
 
 ---
-
 spring:
   config:
     activate:
@@ -32,7 +31,7 @@ spring:
   config:
     activate:
       on-profile: prod
-#
+
 #springdoc:
 #  swagger-ui:
 #    enabled: false
