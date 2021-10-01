@@ -30,8 +30,8 @@ public class TokenController {
             String email = tokenProvider.getUid(token);
             Token newToken = tokenProvider.createToken(email, Role.USER);
 
-            response.addHeader("Auth", newToken.getAccessToken());
-            response.addHeader("Refresh", newToken.getRefreshToken());
+            response.addHeader("Authorization", newToken.getAccessToken());
+            // response.addHeader("Refresh", newToken.getRefreshToken());
             response.setContentType("application/json;charset=UTF-8");
 
             return "HAPPY NEW TOKEN";

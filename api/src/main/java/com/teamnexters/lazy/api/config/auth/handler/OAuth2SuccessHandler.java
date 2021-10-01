@@ -1,4 +1,4 @@
-package com.teamnexters.lazy.api.config.auth;
+package com.teamnexters.lazy.api.config.auth.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.teamnexters.lazy.api.config.auth.jwt.JwtTokenProvider;
@@ -27,7 +27,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
             throws IOException {
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
         Token token = jwtTokenProvider.createToken((String) oAuth2User.getAttributes().get("email"), Role.USER);
-        log.info("{}", token);
+        log.info("### Token : [ {} ]", token);
 
         writeTokenResponse(response, token);
     }
@@ -36,8 +36,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
             throws IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        response.addHeader("Auth", token.getAccessToken());
-        response.addHeader("Refresh", token.getRefreshToken());
+        response.addHeader("Authorization", token.getAccessToken());
         response.setContentType("application/json;charset=UTF-8");
 
         var writer = response.getWriter();
