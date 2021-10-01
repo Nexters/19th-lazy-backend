@@ -23,7 +23,6 @@ import java.util.Collections;
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     private final MemberRepository memberRepository;
-    private final HttpSession httpSession;
 
     /**
      * 1. 구글 로그인 버튼 클릭
@@ -59,8 +58,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         // 사용자 정보 등록 or 업데이트
         Member member = saveOrUpdate(attributes);
-        // 세션에 사용자 정보 등록
-        httpSession.setAttribute("user", new SessionUser(member));
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(member.getRoleKey())),
