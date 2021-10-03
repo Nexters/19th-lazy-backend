@@ -22,6 +22,7 @@ import java.util.Optional;
 
 @Slf4j
 public class JwtAuthFilter extends GenericFilterBean {
+
     private final JwtTokenProvider jwtTokenProvider;
 
     @Autowired

@@ -5,18 +5,23 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.util.Base64;
 import java.util.Date;
 
+@Slf4j
 @Service
+@PropertySource("classpath:application-oauth.yml")
 public class JwtTokenProvider {
 
     private String secretKey;
 
     public JwtTokenProvider(@Value("${security.jwt.token.secret-key}") String secretKey) {
+        log.info(">>> secretKey : {}", secretKey);
         this.secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
@@ -74,5 +79,7 @@ public class JwtTokenProvider {
             return false;
         }
     }
+
+
 
 }
