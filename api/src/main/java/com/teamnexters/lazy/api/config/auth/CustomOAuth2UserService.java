@@ -1,6 +1,5 @@
 package com.teamnexters.lazy.api.config.auth;
 import com.teamnexters.lazy.api.config.auth.dto.OAuthAttributes;
-import com.teamnexters.lazy.api.config.auth.dto.SessionUser;
 import com.teamnexters.lazy.common.domain.member.Member;
 import com.teamnexters.lazy.common.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +13,6 @@ import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.Collections;
 
 @Slf4j
@@ -36,7 +34,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
      *
      * @param userRequest OAuth 프로바이더에서 내려준 정보
      * @return OAuth User
-     * @throws OAuth2AuthenticationException
+     * @throws OAuth2AuthenticationException OAuth2 Exception
      */
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -70,6 +68,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         Member user = memberRepository.findByEmail(attributes.getEmail())
                 .map(entity -> entity.update(attributes.getName(),attributes.getPicture()))
                 .orElse(attributes.toEntity());
+        log.debug(">>> user Info : {}", user);
+
         // DB에 저장 후 사용자 객체 반환
         return memberRepository.save(user);
     }
