@@ -7,7 +7,7 @@ import lombok.*;
 
 @Getter
 @Table(name = "member")
-@ToString(of = {"name", "email"})
+@ToString(of = {"memIdx", "name", "email", "provider"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Member extends BaseTimeEntity {
@@ -17,6 +17,12 @@ public class Member extends BaseTimeEntity {
     @Column(name = "mem_idx")
     private Long memIdx;
 
+    @Column(name = "oauth_id")
+    private Integer oauthId;
+
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "mem_name", nullable = false)
     private String name;
 
@@ -24,7 +30,7 @@ public class Member extends BaseTimeEntity {
     @Column(name = "mem_nickname", unique = true)
     private String nickName;
 
-    @Column(name = "mem_email", unique = true, nullable = false)
+    @Column(name = "mem_email", unique = true)
     private String email;
 
     @Column(name = "mem_image_url", nullable = false)
@@ -39,7 +45,9 @@ public class Member extends BaseTimeEntity {
     private Provider provider; // OAuth2 Provider
 
     @Builder
-    public Member(String name, String nickName, String email, String picture, Role role, Provider provider) {
+    public Member(Integer oauthId, String password, String name, String nickName, String email, String picture, Role role, Provider provider) {
+        this.oauthId = oauthId;
+        this.password = password;
         this.name = name;
         this.nickName = nickName;
         this.email = email;
