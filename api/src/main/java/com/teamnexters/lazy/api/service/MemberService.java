@@ -1,14 +1,13 @@
 package com.teamnexters.lazy.api.service;
 
 import com.teamnexters.lazy.api.domain.MemberDto;
+import com.teamnexters.lazy.api.exception.MemberNotFoundException;
 import com.teamnexters.lazy.api.exception.NickNameDuplicationException;
 import com.teamnexters.lazy.common.domain.member.Member;
 import com.teamnexters.lazy.common.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,11 +21,11 @@ public class MemberService {
      * @param dto 업데이트 요청 데이터
      */
     @Transactional
-    public void updateNickName(MemberDto.UpdateNickNameReq dto) {
+    public void updateNickName(MemberDto.UpdateNickNameReq dto, Long memIdx) {
         if (isExistedNickName(dto.getNickName()))
             throw new NickNameDuplicationException(dto.getNickName());
 
-        Member member = getOneMember(dto.getMemIdx());
+        Member member = getOneMember(memIdx);
         member.setNickName(dto.getNickName());
         memberRepository.save(member); // 확인해보고 중복코드 제거
     }
@@ -62,8 +61,8 @@ public class MemberService {
      * @return 해당 회원 Data
      */
     @Transactional(readOnly = true)
-    public Optional<Member> getOneMemberByEmail(String email) {
-        return memberRepository.findByEmail(email);
+    public Member getOneMemberByEmail(String email) throws MemberNotFoundException {
+        return memberRepository.findByEmail(email).orElseThrow();
     }
 
 }
