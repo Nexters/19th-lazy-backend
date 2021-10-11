@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -26,9 +27,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // REST API - 로그인 페이지 폼 X, csrf 보안 불필요, 토큰 기반 인증으로 세션 생성 X
+        // REST API - 로그인 페이지 폼 X, 토큰 기반 인증으로 세션 생성 X
+        // csrf h2 제외
         http.httpBasic().disable()
-                .csrf().disable()
+                .csrf()
+                .ignoringAntMatchers("/h2-console/**")
+                .and()
+                .headers().addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         // URL 별 권한 관리
