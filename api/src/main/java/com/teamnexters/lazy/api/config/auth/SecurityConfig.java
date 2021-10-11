@@ -39,7 +39,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/css/**", "/images/**", "/js/**",
                         "/swagger-ui/**", "/swagger-ui.html",
                         "/api-docs/**",
-                        "/token/**"
+                        "/token/**",
+                        "/api/v1/oauth/**",
+                        "/h2-console/**",
+                        "/api/v1/oauth/sign-in/**"
                 ).permitAll()
                 .antMatchers(
                         // "USER"인 경우만 접근 가능
