@@ -5,5 +5,6 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-ui:1.5.10'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     implementation 'javax.xml.bind:jaxb-api'
+    implementation 'com.google.code.gson:gson'
 
 }
