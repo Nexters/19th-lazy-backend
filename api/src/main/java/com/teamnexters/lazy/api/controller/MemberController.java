@@ -25,6 +25,7 @@ public class MemberController {
 
     @Operation(summary = "✅ 단일 회원 정보 조회 API",
             description = "회원의 상세 정보를 조회해요.",
+            security = @SecurityRequirement(name = "bearerAuth"),
             responses = {
                     @ApiResponse(
                             responseCode = "200", description = "[Ok] Get One Member Info",
@@ -38,6 +39,7 @@ public class MemberController {
 
     @Operation(summary = "✅ 닉네임 수정 API",
             description = "회원의 닉네임을 수정해요.",
+            security = @SecurityRequirement(name = "bearerAuth"),
             responses = {
                     @ApiResponse(
                             responseCode = "200", description = "[Ok] Update Member NickName",
