@@ -17,6 +17,8 @@ create table habit (
 # 회원 Table
 create table member (
                         mem_idx bigint not null auto_increment,
+                        oauth_id varchar(255),
+                        password varchar(255),
                         created_dt datetime,
                         modified_dt datetime,
                         mem_email varchar(255) not null,
