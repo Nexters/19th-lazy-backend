@@ -32,8 +32,16 @@ public class MemberController {
                             content = @Content(schema = @Schema(implementation = MemberDto.AllRes.class)))})
     @GetMapping("/v1/member/{mem-idx}")
     public ResponseEntity<Member> getOneMember(
-            @Parameter(description = "회원 번호", required = true) @PathVariable(name="mem-idx") Long idx) {
-                return ResponseEntity.ok().body(memberService.getOneMember(idx));
+            @Parameter(hidden = true) Authentication authentication) {
+        Member member = (Member) authentication.getPrincipal();
+        log.info(">>> authentication Principal : {}", member);
+
+        if (member == null) {
+            throw new MemberNotFoundException("Auth");
+        } else {
+            log.info(">>> Member info : {}", member);
+            return ResponseEntity.ok().body(member);
+        }
     }
 
 
@@ -46,8 +54,13 @@ public class MemberController {
                             content = @Content(schema = @Schema(implementation = MemberDto.IndexRes.class)))})
     @PutMapping("/v1/member")
     public ResponseEntity<Long> updateMemberNickName(
+            @Parameter(hidden = true) Authentication authentication,
             @Parameter(description = "업데이트할 회원 정보", required = true) @RequestBody @Valid MemberDto.UpdateNickNameReq dto) {
-        memberService.updateNickName(dto);
-        return ResponseEntity.ok().body(dto.getMemIdx());
+        Member member = (Member) authentication.getPrincipal();
+        Long memIdx = member.getMemIdx();
+        log.debug(">>> Update Member No [{}] NickName : {}", memIdx, dto);
+
+        memberService.updateNickName(dto, memIdx);
+        return ResponseEntity.ok().body(memIdx);
     }
 }
