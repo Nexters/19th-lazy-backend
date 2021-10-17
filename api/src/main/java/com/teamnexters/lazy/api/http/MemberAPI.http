@@ -5,8 +5,8 @@ Content-Type: application/json
 < addHabit.json
 
 ### 회원 정보 조회
-GET {{baseUrl}}/api/v1/member/{{mem-idx}}
-
+GET {{baseUrl}}/api/v1/member
+Authorization: Bearer {{auth_token}}
 
 ### 습관 삭제 API
 DELETE {{baseUrl}}/api/v1/habit/{{mem-idx}}/{{habit-idx}}
