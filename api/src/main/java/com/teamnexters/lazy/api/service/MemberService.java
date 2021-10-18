@@ -50,7 +50,7 @@ public class MemberService {
      */
     @Transactional(readOnly = true)
     public boolean isExistedNickName(String nickName) {
-        return memberRepository.findByNickName(nickName).orElseGet(null) != null;
+        return memberRepository.findByNickName(nickName).orElse(null) != null;
     }
 
 

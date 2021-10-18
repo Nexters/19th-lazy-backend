@@ -18,7 +18,7 @@ public class Member extends BaseTimeEntity {
     private Long memIdx;
 
     @Column(name = "oauth_id")
-    private Integer oauthId;
+    private String oauthId;
 
     @Column(name = "password")
     private String password;
@@ -45,7 +45,7 @@ public class Member extends BaseTimeEntity {
     private Provider provider; // OAuth2 Provider
 
     @Builder
-    public Member(Integer oauthId, String password, String name, String nickName, String email, String picture, Role role, Provider provider) {
+    public Member(String oauthId, String password, String name, String nickName, String email, String picture, Role role, Provider provider) {
         this.oauthId = oauthId;
         this.password = password;
         this.name = name;

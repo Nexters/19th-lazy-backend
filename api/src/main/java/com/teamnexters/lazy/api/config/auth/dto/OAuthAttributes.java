@@ -17,7 +17,7 @@ import java.util.Map;
 @Getter
 public class OAuthAttributes {
     private final Map<String, Object> attributes; // OAuth2 반환하는 유저 정보 Map
-    private final Integer oauthId;
+    private final String oauthId;
     private final String nameAttributeKey;
     private final String name;
     private final String email;
@@ -40,7 +40,7 @@ public class OAuthAttributes {
 
     private static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes) {
         return OAuthAttributes.builder()
-                .oauthId((Integer) attributes.get("id"))
+                .oauthId((String) attributes.get("sub"))
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
                 .picture((String) attributes.get("picture"))
@@ -57,7 +57,7 @@ public class OAuthAttributes {
         Map<String, Object> kakaoProfile = (Map<String, Object>) kakaoAccount.get("profile");
 
         return OAuthAttributes.builder()
-                .oauthId((Integer) attributes.get("id"))
+                .oauthId(String.valueOf(attributes.get("id")))
                 .name((String) kakaoProfile.get("nickname"))
                 .email((String) kakaoAccount.get("email"))
                 .picture((String) kakaoProfile.get("profile_image_url"))
