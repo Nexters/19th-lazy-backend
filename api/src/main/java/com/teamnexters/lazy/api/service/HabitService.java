@@ -19,19 +19,40 @@ public class HabitService {
     /**
      * 습관 생성하기
      *
-     * @param dto 습관 생성을 위한 DTO
+     * @param dto    습관 생성을 위한 DTO
+     * @param memIdx 회원 번호 index
      * @return 습관 생성 응답
      */
     @Transactional
-    public HabitDto.HabitRes create(HabitDto.AddHabitReq dto) {
+    public HabitDto.HabitRes create(HabitDto.AddHabitReq dto, Long memIdx) {
         // 습관 중복 검사
-        if (isExistedHabit(dto.getMemIdx(), dto.getHabitName()))
+        if (isExistedHabit(memIdx, dto.getHabitName()))
             throw new HabitDuplicationException(dto.getHabitName());
-
-        Habit entity = habitRepository.save(dto.toEntity());
+        Habit entity = dto.toEntity();
+        entity.setMemIdx(memIdx);
+        habitRepository.save(entity);
 
         return new HabitDto.HabitRes(entity.getHabitIdx(), entity.getHabitName());
+    }
 
+    /**
+     * 습관 수정하기
+     *
+     * @param dto 수정할 습관 DTO
+     * @return 수정된 습관 Response
+     */
+    @Transactional
+    public HabitDto.HabitRes update(HabitDto.UpdateHabitReq dto) {
+
+        Habit entity = habitRepository.getById(dto.getHabitIdx());
+
+        entity.update(dto.getHabitName(),
+                dto.getHabitDetail(),
+                dto.getHabitCategory(),
+                dto.getNoticeState(),
+                dto.getNoticeTime());
+
+        return new HabitDto.HabitRes(entity.getHabitIdx(), entity.getHabitName());
     }
 
     /**
@@ -55,7 +76,7 @@ public class HabitService {
      */
     @Transactional(readOnly = true)
     public boolean isExistedHabit(Long memIdx, String habitName) {
-        return habitRepository.findByMemIdxAndHabitName(memIdx, habitName).orElseGet(null) != null;
+        return habitRepository.findByMemIdxAndHabitName(memIdx, habitName).orElse(null) != null;
     }
 
     /**
