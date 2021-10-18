@@ -1,10 +1,8 @@
 package com.teamnexters.lazy.common.domain.habit;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.teamnexters.lazy.common.domain.BaseTimeEntity;
 import lombok.*;
 import javax.persistence.*;
-import java.time.LocalTime;
 
 @Getter
 @Table(name = "habit")
@@ -18,6 +16,7 @@ public class Habit extends BaseTimeEntity {
     @Column(name = "habit_idx")
     private Long habitIdx;
 
+    @Setter
     @Column(name = "mem_idx")
     private Long memIdx;
 
@@ -39,13 +38,12 @@ public class Habit extends BaseTimeEntity {
     @Column(name = "habit_notice_state")
     private Boolean habitNoticeState;
 
-    @JsonFormat(pattern = "HH:mm")
     @Column(name = "habit_notice_time")
-    private LocalTime habitNoticeTime;
+    private String habitNoticeTime;
 
     @Builder
     public Habit(Long memIdx, String habitName, String habitDetail, Integer habitCategory,
-                 String habitFrequency, Integer habitDelayDay, Boolean habitNoticeState, LocalTime habitNoticeTime) {
+                 String habitFrequency, Integer habitDelayDay, Boolean habitNoticeState, String habitNoticeTime) {
         this.memIdx = memIdx;
         this.habitName = habitName;
         this.habitDetail = habitDetail;
@@ -57,7 +55,7 @@ public class Habit extends BaseTimeEntity {
     }
 
     public Habit update(String habitName, String habitDetail, Integer habitCategory,
-                        Boolean habitNoticeState, LocalTime habitNoticeTime) {
+                        Boolean habitNoticeState, String habitNoticeTime) {
         this.habitName = habitName;
         this.habitDetail = habitDetail;
         this.habitCategory = habitCategory;
