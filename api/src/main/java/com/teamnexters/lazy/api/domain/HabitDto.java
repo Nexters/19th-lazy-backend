@@ -8,10 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.List;
-
 
 public class HabitDto {
 
@@ -23,8 +19,6 @@ public class HabitDto {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     public static class AddHabitReq {
 
-        @Schema(description = "회원 번호", defaultValue = "2")
-        private Long memIdx;
         @Schema(description = "습관 이름", defaultValue = "사이드레터럴레이즈 5세트")
         private String habitName;
         @Schema(description = "습관 설명", defaultValue = "1세트 30개, 휴식 30초")
@@ -38,32 +32,23 @@ public class HabitDto {
         @Schema(description = "알림 시간", defaultValue = "12:00")
         private String noticeTime;
 
-        // 알림 시간
-        @Schema(hidden = true)
-        private LocalTime finalNoticeTime;
-
-        public AddHabitReq(Long memIdx, String habitName, String habitDetail, Integer habitCategory,
+        public AddHabitReq(String habitName, String habitDetail, Integer habitCategory,
                            String habitFrequency, Boolean noticeState, String noticeTime) {
-            this.memIdx = memIdx;
             this.habitName = habitName;
             this.habitDetail = habitDetail;
             this.habitCategory = habitCategory;
             this.habitFrequency = habitFrequency;
             this.noticeState = noticeState;
-            List<String> hourAndMin = Arrays.asList(noticeTime.split(":"));
-            LocalTime formTime = LocalTime.of(Integer.parseInt(hourAndMin.get(0)),
-                    Integer.parseInt(hourAndMin.get(1)));
-            this.finalNoticeTime = formTime;
+            this.noticeTime = noticeTime;
         }
 
         public Habit toEntity() {
             return Habit.builder()
-                    .memIdx(this.memIdx)
                     .habitName(this.habitName)
                     .habitDetail(this.habitDetail)
                     .habitCategory(this.habitCategory)
                     .habitNoticeState(this.noticeState)
-                    .habitNoticeTime(this.finalNoticeTime)
+                    .habitNoticeTime(this.noticeTime)
                     .habitDelayDay(0)
                     .habitFrequency(this.habitFrequency)
                     .build();
@@ -71,15 +56,39 @@ public class HabitDto {
     }
 
     /**
-     * 습관 추가 완료 응답
+     * 습관 업데이트 요청 Dto
+     */
+    @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @AllArgsConstructor
+    @Schema(description = "Request to change Habit Info.")
+    public static class UpdateHabitReq {
+        @Schema(description = "습관 index", defaultValue = "1")
+        private Long habitIdx;
+        @Schema(description = "습관 이름", defaultValue = "변경할 습관")
+        private String habitName;
+        @Schema(description = "습관 설명", defaultValue = "설명은 사실 필요가 없었음")
+        private String habitDetail;
+        @Schema(description = "습관 카테고리", defaultValue = "122")
+        private Integer habitCategory;
+        @Schema(description = "습관 주기", defaultValue = "4,5")
+        private String habitFrequency;
+        @Schema(description = "알림 여부", defaultValue = "true")
+        private Boolean noticeState;
+        @Schema(description = "알림 시간", defaultValue = "15:00")
+        private String noticeTime;
+    }
+
+    /**
+     * 습관 추가/수정 완료 응답
      */
     @Getter
     @AllArgsConstructor
-    @Schema(description = "습관 추가 완료 응답")
+    @Schema(description = "습관 추가/수정 완료 응답")
     public static class HabitRes {
         @Schema(description = "습관 index", defaultValue = "1")
         private final Long habitIdx;
-        @Schema(description = "습관 이름", defaultValue = "사이드레터럴레이즈 5세트")
+        @Schema(description = "습관 이름", defaultValue = "사이드레터럴레이즈 5세트/변경한 습관 이름")
         private final String habitName;
     }
 
