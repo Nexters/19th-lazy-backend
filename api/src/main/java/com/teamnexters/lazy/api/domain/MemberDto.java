@@ -20,8 +20,6 @@ public class MemberDto {
     @AllArgsConstructor
     @Schema(description = "Request to change NickName")
     public static class UpdateNickNameReq {
-        @Schema(description = "회원 번호", defaultValue = "2")
-        private Long memIdx;
         @Schema(description = "회원 닉네임", defaultValue = "변경할 닉네임")
         private String nickName;
     }
@@ -32,7 +30,7 @@ public class MemberDto {
     @Getter
     @AllArgsConstructor
     @Schema(description = "Member Data")
-    public static class AllRes {
+    public static class AllMemberRes {
         @Schema(description = "회원 번호", defaultValue = "2")
         private final Long memIdx;
         @Schema(description = "회원 이름", defaultValue = "박영준")
@@ -59,7 +57,7 @@ public class MemberDto {
     @Getter
     @AllArgsConstructor
     @Schema(description = "Member Index")
-    public static class IndexRes {
+    public static class MemberIndexRes {
         @Schema(description = "회원 번호", defaultValue = "2")
         private final Long memIdx;
     }

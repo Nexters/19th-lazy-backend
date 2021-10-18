@@ -1,6 +1,7 @@
 package com.teamnexters.lazy.api.controller;
 
 import com.teamnexters.lazy.api.domain.MemberDto;
+import com.teamnexters.lazy.api.exception.MemberNotFoundException;
 import com.teamnexters.lazy.api.service.MemberService;
 import com.teamnexters.lazy.common.domain.member.Member;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,9 +9,12 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,6 +22,7 @@ import javax.validation.Valid;
 @Tag(name = "Member Controller", description = "회원 정보 관련 컨트롤러")
 @RestController
 @AllArgsConstructor
+@Slf4j
 @RequestMapping("/api")
 public class MemberController {
 
@@ -29,8 +34,8 @@ public class MemberController {
             responses = {
                     @ApiResponse(
                             responseCode = "200", description = "[Ok] Get One Member Info",
-                            content = @Content(schema = @Schema(implementation = MemberDto.AllRes.class)))})
-    @GetMapping("/v1/member/{mem-idx}")
+                            content = @Content(schema = @Schema(implementation = MemberDto.AllMemberRes.class)))})
+    @GetMapping("/v1/member")
     public ResponseEntity<Member> getOneMember(
             @Parameter(hidden = true) Authentication authentication) {
         Member member = (Member) authentication.getPrincipal();
@@ -51,7 +56,7 @@ public class MemberController {
             responses = {
                     @ApiResponse(
                             responseCode = "200", description = "[Ok] Update Member NickName",
-                            content = @Content(schema = @Schema(implementation = MemberDto.IndexRes.class)))})
+                            content = @Content(schema = @Schema(implementation = MemberDto.MemberIndexRes.class)))})
     @PutMapping("/v1/member")
     public ResponseEntity<Long> updateMemberNickName(
             @Parameter(hidden = true) Authentication authentication,
