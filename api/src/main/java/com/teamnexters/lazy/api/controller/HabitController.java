@@ -78,5 +78,17 @@ public class HabitController {
         return ResponseEntity.ok().body(habitService.deleteHabit(member.getMemIdx(), habitIdx));
     }
 
+    @Operation(summary = "✅ 습관 수정 API",
+            description = "습관을 수정해요.",
+            security = @SecurityRequirement(name = "bearerAuth"),
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "[Ok] Change habit Done",
+                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = HabitDto.AllHabitRes.class))))})
+    @PutMapping("/v1/habit")
+    public ResponseEntity<HabitDto.HabitRes> updateHabit(
+            @Parameter(hidden = true) Authentication authentication,
+            @Parameter(description = "업데이트할 습관 정보", required = true) @RequestBody @Valid HabitDto.UpdateHabitReq dto) {
+        return ResponseEntity.ok().body(habitService.update(dto));
+    }
 
 }
