@@ -31,8 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // csrf h2 제외
         http.httpBasic().disable()
                 .csrf()
-                .ignoringAntMatchers("/h2-console/**")
-                .and()
+                .ignoringAntMatchers("/h2-console/**").disable()
                 .headers().addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
