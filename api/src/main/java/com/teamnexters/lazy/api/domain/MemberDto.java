@@ -25,6 +25,18 @@ public class MemberDto {
     }
 
     /**
+     * 중복 체크할 닉네임 Dto
+     */
+    @Getter
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @AllArgsConstructor
+    @Schema(description = "Request to check duplication NickName")
+    public static class checkNickNameReq {
+        @Schema(description = "회원 닉네임", defaultValue = "체크할 닉네임")
+        private String nickName;
+    }
+
+    /**
      * 회원 데이터 Dto
      */
     @Getter
@@ -61,4 +73,5 @@ public class MemberDto {
         @Schema(description = "회원 번호", defaultValue = "2")
         private final Long memIdx;
     }
+
 }
