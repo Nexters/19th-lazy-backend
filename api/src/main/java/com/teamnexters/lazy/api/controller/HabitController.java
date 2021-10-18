@@ -31,12 +31,12 @@ public class HabitController {
             description = "습관을 추가해요.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "[Ok] Create Habit",
-                            content = @Content(schema = @Schema(implementation = HabitDto.Res.class))),
+                            content = @Content(schema = @Schema(implementation = HabitDto.HabitRes.class))),
                     @ApiResponse(responseCode = "421", description = "[Error] Duplicate Habit Name",
                             content = @Content(schema = @Schema(implementation = ErrorResponse.class)))})
     @PostMapping("/v1/habit")
-    public ResponseEntity<HabitDto.Res> saveHabit(
-            @Parameter(description = "습관 정보", required = true) @RequestBody @Valid HabitDto.AddReq dto) {
+    public ResponseEntity<HabitDto.HabitRes> saveHabit(
+            @Parameter(description = "습관 정보", required = true) @RequestBody @Valid HabitDto.AddHabitReq dto) {
         return ResponseEntity.ok().body(habitService.create(dto));
     }
 
@@ -44,7 +44,7 @@ public class HabitController {
             description = "습관의 전체 미루기 현황 조회",
             responses = {
                     @ApiResponse(responseCode = "200", description = "[Ok] Get All Habit List",
-                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = HabitDto.AllRes.class))))})
+                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = HabitDto.AllHabitRes.class))))})
     @GetMapping("/v1/habit/{mem-idx}")
     public ResponseEntity<Page<Habit>> getHabitList(
             @Parameter(description = "회원 번호", required = true) @PathVariable(name = "mem-idx") Long memIdx,
@@ -60,7 +60,7 @@ public class HabitController {
             description = "습관을 삭제해요.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "[Ok] Delete Habit",
-                            content = @Content(schema = @Schema(implementation = HabitDto.IndexRes.class)))})
+                            content = @Content(schema = @Schema(implementation = HabitDto.HabitIndexRes.class)))})
     @DeleteMapping("/v1/habit/{mem-idx}/{habit-idx}")
     public ResponseEntity<Long> deleteHabit(
             @Parameter(description = "회원 번호", required = true) @PathVariable(name = "mem-idx") Long memIdx,

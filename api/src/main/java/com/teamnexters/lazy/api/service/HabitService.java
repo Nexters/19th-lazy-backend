@@ -23,14 +23,14 @@ public class HabitService {
      * @return 습관 생성 응답
      */
     @Transactional
-    public HabitDto.Res create(HabitDto.AddReq dto) {
+    public HabitDto.HabitRes create(HabitDto.AddHabitReq dto) {
         // 습관 중복 검사
         if (isExistedHabit(dto.getMemIdx(), dto.getHabitName()))
             throw new HabitDuplicationException(dto.getHabitName());
 
         Habit entity = habitRepository.save(dto.toEntity());
 
-        return new HabitDto.Res(entity.getHabitIdx(), entity.getHabitName());
+        return new HabitDto.HabitRes(entity.getHabitIdx(), entity.getHabitName());
 
     }
 

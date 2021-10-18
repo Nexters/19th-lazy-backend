@@ -21,7 +21,7 @@ public class HabitDto {
     @Schema(description = "습관 추가 요청 파라미터")
     @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    public static class AddReq {
+    public static class AddHabitReq {
 
         @Schema(description = "회원 번호", defaultValue = "2")
         private Long memIdx;
@@ -42,8 +42,8 @@ public class HabitDto {
         @Schema(hidden = true)
         private LocalTime finalNoticeTime;
 
-        public AddReq(Long memIdx, String habitName, String habitDetail, Integer habitCategory,
-                      String habitFrequency, Boolean noticeState, String noticeTime) {
+        public AddHabitReq(Long memIdx, String habitName, String habitDetail, Integer habitCategory,
+                           String habitFrequency, Boolean noticeState, String noticeTime) {
             this.memIdx = memIdx;
             this.habitName = habitName;
             this.habitDetail = habitDetail;
@@ -76,7 +76,7 @@ public class HabitDto {
     @Getter
     @AllArgsConstructor
     @Schema(description = "습관 추가 완료 응답")
-    public static class Res {
+    public static class HabitRes {
         @Schema(description = "습관 index", defaultValue = "1")
         private final Long habitIdx;
         @Schema(description = "습관 이름", defaultValue = "사이드레터럴레이즈 5세트")
@@ -89,7 +89,7 @@ public class HabitDto {
     @Getter
     @AllArgsConstructor
     @Schema(description = "습관 데이터")
-    public static class AllRes {
+    public static class AllHabitRes {
         @Schema(description = "습관 번호", defaultValue = "1")
         private final Long habitIdx;
         @Schema(description = "습관 이름", defaultValue = "사이드레터럴레이즈 5세트")
@@ -118,7 +118,7 @@ public class HabitDto {
     @Getter
     @AllArgsConstructor
     @Schema(description = "Habit Index")
-    public static class IndexRes {
+    public static class HabitIndexRes {
         @Schema(description = "습관 번호", defaultValue = "3")
         private final Long habitIdx;
     }
