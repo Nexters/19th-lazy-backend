@@ -59,3 +59,10 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         show_sql: true
         use_sql_comments: true
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
