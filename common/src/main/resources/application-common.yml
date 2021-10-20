@@ -5,6 +5,10 @@ spring:
 logging:
   level: Debug
 
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+
 ---
 spring:
   config:
@@ -16,10 +20,10 @@ spring:
       path: /h2-console
 
   datasource:
-    url: jdbc:h2:mem:testdb;MODE=mysql;  # 접속 URL
-    username: yj_park  # 사용자 이름 (로그인 시 사용)
-    password: 1234     # 사용자 암호 (로그인 시 사용)
-    driver-class-name: org.h2.Driver  # h2 드라이버 설정
+    url: ENC(5eKqMRwWm3gu2cWbj7ZDwU6kjns8jc6x5mfhNO2OeGZGA6acOdOGEA==)
+    username: ENC(tghQ6A3eYkNGhywrBV2ZTA==)
+    password: ENC(sfkTnwAknl+TTzT1SMmuZA==)
+    driver-class-name: org.h2.Driver
   jpa:
     hibernate:
       ddl-auto: update
@@ -40,35 +44,15 @@ logging:
 spring:
   config:
     activate:
-      on-profile: dev
+      on-profile: dev, prod
   datasource:
-    url: jdbc:mysql://db-lazy.cwn26ebdtrvp.ap-northeast-2.rds.amazonaws.com:3306/lazy_19th?useUnicode=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: *********
-    password: *********
-    # driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ENC(0y7YQLK2Ag0ZSBBDbd+kdOHEbppCv1bTrCzThhns4sBW/vAjVbIK6bmDlAkpyo+jtFGgYbpTpLDW8NBIGaj5V+aQ21O94GGv7tecj50QgLSB3WW+sYUkAZDBdRoTfG+i7QOjcOwgVEYckN2+RhKLV5n5DimH+/C0Q43zZULdRzeSOy9YLSaB0lYGHZ0tffh0X368hUHm1JyPKmP6WhYUCw==)
+    username: ENC(bWk/QGIPORh8yasR9NSxJA==)
+    password: ENC(bVuitv+Tiho4lTO2W5mCTg==)
+
   jpa:
     hibernate:
       ddl-auto: none
-    properties:
-      hibernate:
-        format_sql: true
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-        show_sql: true
-        use_sql_comments: true
-
----
-spring:
-  config:
-    activate:
-      on-profile: prod
-  datasource:
-    url: jdbc:mysql://db-lazy.cwn26ebdtrvp.ap-northeast-2.rds.amazonaws.com:3306/lazy_19th?useUnicode=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: *********
-    password: *********
-    # driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: create
     properties:
       hibernate:
         format_sql: true

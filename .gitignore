@@ -204,3 +204,4 @@ gradle-app.setting
 
 # OAuth2.0 Setting yml
 **/application-oauth.yml
+**/JasyptApplicationTest.java
