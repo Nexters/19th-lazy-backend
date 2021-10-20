@@ -51,7 +51,7 @@ public class MemberDto {
         private final String nickName;
         @Schema(description = "회원 이메일", defaultValue = "youngjun108059@gmail.com")
         private final String email;
-        @Schema(description = "OAuth 프로필 사진", defaultValue = "")
+        @Schema(description = "OAuth 프로필 사진", defaultValue = "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_640x640.jpg")
         private final String picture;
         @Schema(description = "습관 index", defaultValue = "1")
         private final Role role;
