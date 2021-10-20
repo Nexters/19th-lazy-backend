@@ -6,7 +6,7 @@ spring:
   config:
     import: classpath:application-common.yml
   profiles:
-    active: local
+    active: dev
     include:
       - oauth
       - swagger
