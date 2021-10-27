@@ -42,7 +42,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
 
-        // OAuth2 서비스 id (구글, 카카오, 네이버)
+        // OAuth2 서비스 id (구글, 카카오, 네이버, 애플)
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         // 로그인 시, PK가 되는 필드 값 받아오기 (구글:"sub", 네이버 카카오 지원x)
         String userNameAttributeName = userRequest.getClientRegistration()

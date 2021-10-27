@@ -33,6 +33,8 @@ public class OAuthAttributes {
                 return ofKakao(attributes);
             case "naver":
                 return ofNaver(attributes);
+            case "apple":
+                return ofApple(attributes);
             default:
                 throw new OAuth2ProviderNotMatchException(provider);
         }
@@ -47,6 +49,23 @@ public class OAuthAttributes {
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .provider(Provider.GOOGLE)
+                .build();
+    }
+
+    private static OAuthAttributes ofApple(Map<String, Object> attributes) {
+        // JSON 형태를 Map 으로 가져오기 (kakao_account)
+        Map<String, Object> kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
+        // Profile 조회
+        Map<String, Object> kakaoProfile = (Map<String, Object>) kakaoAccount.get("profile");
+
+        return OAuthAttributes.builder()
+                .oauthId(String.valueOf(attributes.get("id")))
+                .name((String) kakaoProfile.get("nickname"))
+                .email((String) kakaoAccount.get("email"))
+                .picture((String) kakaoProfile.get("profile_image_url"))
+                .attributes(kakaoAccount)
+                .nameAttributeKey("email")
+                .provider(Provider.KAKAO)
                 .build();
     }
 
