@@ -1,4 +1,4 @@
-package com.teamnexters.lazy.api.controller.sample;
+package com.teamnexters.lazy.api.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "PingPong API", description = "서버 연결 Test API")
 @RestController
 @RequestMapping("/api")
-public class ApiController {
+public class ApiSampleController {
 
     /**
      * API ping 테스트
