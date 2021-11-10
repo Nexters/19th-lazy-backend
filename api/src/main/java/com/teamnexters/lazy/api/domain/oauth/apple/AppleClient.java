@@ -1,7 +1,5 @@
-package com.teamnexters.lazy.api.config;
+package com.teamnexters.lazy.api.domain.oauth.apple;
 
-import com.teamnexters.lazy.api.config.auth.dto.ApplePublicKeyResponse;
-import com.teamnexters.lazy.api.config.auth.jwt.AppleToken;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

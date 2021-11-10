@@ -1,4 +1,4 @@
-package com.teamnexters.lazy.api.domain.oauthDto;
+package com.teamnexters.lazy.api.domain.oauth.kakao;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

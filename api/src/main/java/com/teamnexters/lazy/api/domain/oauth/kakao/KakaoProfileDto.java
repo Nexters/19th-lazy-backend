@@ -1,4 +1,4 @@
-package com.teamnexters.lazy.api.domain.oauthDto;
+package com.teamnexters.lazy.api.domain.oauth.kakao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

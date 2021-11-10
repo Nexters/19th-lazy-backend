@@ -1,9 +1,7 @@
-package com.teamnexters.lazy.api.config.auth;
+package com.teamnexters.lazy.api.domain.oauth.apple;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.teamnexters.lazy.api.config.AppleClient;
-import com.teamnexters.lazy.api.config.auth.dto.ApplePublicKeyResponse;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;

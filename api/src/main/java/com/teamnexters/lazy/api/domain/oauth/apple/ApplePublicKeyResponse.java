@@ -1,4 +1,4 @@
-package com.teamnexters.lazy.api.config.auth.dto;
+package com.teamnexters.lazy.api.domain.oauth.apple;
 
 import lombok.Getter;
 import lombok.Setter;
