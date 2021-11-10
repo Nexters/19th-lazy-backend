@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/token/**",
                         "/api/v1/oauth/**",
                         "/h2-console/**",
-                        "/api/v1/oauth/sign-in/**"
+                        "/login/oauth2/**"
                 ).permitAll()
                 .antMatchers(
                         // "USER"인 경우만 접근 가능
