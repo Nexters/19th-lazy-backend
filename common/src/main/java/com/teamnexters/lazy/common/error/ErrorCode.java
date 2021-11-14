@@ -12,6 +12,7 @@ public enum ErrorCode {
     ENTITY_NOT_FOUND(404, "C005", "Entity 를 찾을 수 없습니다."),
     METHOD_NOT_ALLOWED(405, "C006", "허용되지 않은 HTTP 메소드입니다."),
     TOKEN_IS_EXPIRED(407, "C007", "토큰이 만료되었습니다."),
+    TOKEN_IS_NOT_VALID(408, "C008", "토큰이 유효하지 않습니다."),
 
     INTERNAL_SERVER_ERROR(500, "C008", "서버 내부 에러입니다."),
     EXTERNAL_SERVER_ERROR(501, "C009", "외부 API 통신 에러입니다."),
