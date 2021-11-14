@@ -13,15 +13,29 @@ public class KakaoProfileDto {
     private Long id;
     private Properties properties;
 
+    @JsonProperty("kakao_account")
+    private Account account;
+
     @Getter
     @Setter
     @ToString
-    private static class Properties {
+    public static class Properties {
         @JsonProperty("nickname")
-        private String nickname;
+        public String nickname;
         @JsonProperty("thumbnail_image")
-        private String thumbnailImage;
+        public String thumbnailImage;
         @JsonProperty("profile_image")
-        private String profileImage;
+        public String profileImage;
+    }
+
+    /**
+     * https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#req-user-info
+     */
+    @Getter
+    @Setter
+    @ToString
+    public static class Account {
+        @JsonProperty("email")
+        public String email;
     }
 }
