@@ -2,6 +2,7 @@ package com.teamnexters.lazy.api.domain.oauth.apple;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.teamnexters.lazy.api.external.Apple.AppleClient;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
