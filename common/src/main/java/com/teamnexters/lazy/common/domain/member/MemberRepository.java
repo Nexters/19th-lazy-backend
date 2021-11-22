@@ -22,4 +22,13 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
      */
     Optional<Member> findByNickName(String nickName);
 
+    /**
+     * 소셜 프로바이더와 ID로 회원 찾기
+     *
+     * @param oauthId 소셜로그인 ID
+     * @param provider 프로바이더
+     * @return
+     */
+    Optional<Member> findByOauthIdAndProvider(String oauthId, Provider provider);
+
 }
