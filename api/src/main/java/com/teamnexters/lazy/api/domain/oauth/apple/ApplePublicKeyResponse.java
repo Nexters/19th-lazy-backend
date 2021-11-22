@@ -9,17 +9,17 @@ import java.util.Optional;
 @Getter
 @Setter
 public class ApplePublicKeyResponse {
-    private List<Key> keys;
+    public List<Key> keys;
 
     @Getter
     @Setter
     public static class Key {
-        private String kty;
-        private String kid;
-        private String use;
-        private String alg;
-        private String n;
-        private String e;
+        public String kty;
+        public String kid;
+        public String use;
+        public String alg;
+        public String n;
+        public String e;
     }
 
     public Optional<Key> getMatchedKeyBy(Object kid, Object alg) {
